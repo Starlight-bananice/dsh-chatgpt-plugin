@@ -1,0 +1,11 @@
+# dsh-chatgpt-provider bundle 层：注册 ChatGPT (SIWC) LLM 适配器 + 模型设置页登录卡片。
+#
+# The config below is not empty on purpose: a provider whose every layer is empty
+# reads as unconfigured, and a configuration surface renders a card only for a
+# provider some layer actually configures. Naming the provider here gives it that
+# layer, so the settings page has a row to hang the sign-in card on.
+- insert:
+    - id: dsh-chatgpt-provider
+      name: '@bananiceee/dsh-chatgpt-provider'
+      config:
+        displayName: ChatGPT

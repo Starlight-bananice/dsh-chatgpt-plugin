@@ -1,0 +1,10 @@
+# Dependencies and build scratch are not published.
+node_modules/
+.client-build/
+.app-ref/
+*.tgz
+
+# lib/ IS committed on purpose: package.json points main at ./lib/index.js and
+# scripts/build.sh needs a full DeepSeek Harness checkout, so a clone without a
+# built lib/ could not be installed at all. Keep it in sync with src/ by running
+# `npm run build` before committing.
