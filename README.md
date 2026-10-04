@@ -210,16 +210,6 @@ Node 的 ESM 模块缓存持有旧的 `lib/index.js`，在「设置 → 插件�
 
 ## 变更记录 / Changelog
 
-### 0.1.2
-
-- **补齐生态元数据。** `package.json` 增加 `repository` / `homepage` / `bugs`；
-  keywords 加入 `dsh-plugin`（生态按这个 GitHub topic 索引）。此前仓库没有 `dsh-plugin` topic，
-  在 awesome 列表与 topic 聚合页里都搜不到
-- **`@deepseek-ai/schemastery` 改为 `peerDependencies`**（原先在 `dependencies`）。
-  官方发布建议要求官方包用 peer 声明，避免同一 harness 包出现两份副本；
-  它由 profile 提供，安装时不会再被复制一份
-- **README 引用配套的 Agent 预设**，说明本插件只负责连接、预设负责 Agent 行为
-
 ### 0.1.1
 
 - **文档重写。** README 改为面向使用者的手册（安装、使用、模型配置、配置项、按现象排障），

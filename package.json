@@ -1,6 +1,6 @@
 {
   "name": "@bananiceee/dsh-chatgpt-provider",
-  "version": "0.1.2",
+  "version": "0.1.1",
   "description": "Sign in with ChatGPT inside DeepSeek Harness and run ChatGPT plan models directly: OpenAI Sign-in-with-ChatGPT (SIWC) OAuth token sharing feeding an official Responses API adapter. 在 DeepSeek Harness 里登录 ChatGPT 账号并直接使用 ChatGPT 模型。",
   "keywords": [
     "dsh-plugin",
