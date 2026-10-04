@@ -1,17 +1,18 @@
 {
   "name": "@bananiceee/dsh-chatgpt-provider",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "Sign in with ChatGPT inside DeepSeek Harness and run ChatGPT plan models directly: OpenAI Sign-in-with-ChatGPT (SIWC) OAuth token sharing feeding an official Responses API adapter. 在 DeepSeek Harness 里登录 ChatGPT 账号并直接使用 ChatGPT 模型。",
   "keywords": [
-    "deepseek",
+    "dsh-plugin",
     "deepseek-harness",
     "dsh",
     "chatgpt",
     "openai",
     "siwc",
     "oauth",
-    "llm-adapter",
-    "responses-api"
+    "llm-provider",
+    "responses-api",
+    "token-sharing"
   ],
   "type": "module",
   "main": "./lib/index.js",
@@ -53,7 +54,6 @@
     }
   },
   "dependencies": {
-    "@deepseek-ai/schemastery": "^3.18.4",
     "jose": "^6.2.12"
   },
   "devDependencies": {
@@ -78,5 +78,16 @@
     "test:adapter": "node tests/adapter.mjs",
     "test:client": "node tests/client.mjs",
     "test:registry": "node tests/registry.mjs"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Starlight-bananice/dsh-chatgpt-plugin.git"
+  },
+  "homepage": "https://github.com/Starlight-bananice/dsh-chatgpt-plugin#readme",
+  "bugs": {
+    "url": "https://github.com/Starlight-bananice/dsh-chatgpt-plugin/issues"
+  },
+  "peerDependencies": {
+    "@deepseek-ai/schemastery": ">=3.18 <4"
   }
 }

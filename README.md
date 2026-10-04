@@ -105,6 +105,30 @@ node tests/live-models.mjs gpt-6-astra
 
 它会各发一个真实请求并报告结果。**只读**凭据文档，绝不刷新令牌。
 
+### 配套的 Agent 预设
+
+本插件只负责**连接**：注册 `chatgpt` 路由、处理登录、按这条受限路由的 wire format 收发。
+它不改变模型的 Agent 行为 —— 而 GPT-6 系列在这套 harness 下有几个已记录在案的习惯需要单独处理：
+
+- **逐步骤的进度播报**：每个 step 前说一句"我会…"。实测一个会话里连续五步的开场白互相
+  68%–80% 相似，内容都是同一份计划的复述
+- **停下来请示而不是动手**：官方文档写明它"更可能在额外输入会改变结果时向用户提问，
+  这会导致用户期待它做合理假设并坚持时它却停下"
+- **上下文涨过 272K 后计价翻倍**（GPT-6 全系列：2 倍输入/缓存价、1.5 倍输出价，整个请求）
+
+[dsh-gpt-agent-preset](https://github.com/Starlight-bananice/dsh-gpt-agent-preset) 就是为此写的配套预设：
+
+```bash
+git clone https://github.com/Starlight-bananice/dsh-gpt-agent-preset.git
+cd dsh-gpt-agent-preset && python3 install-preset.py
+```
+
+装完在 **设置 → Agent 预设** 里选「GPT 执行优先」。它和本插件是**独立的两件事**：
+预设管 Agent 怎么工作，本插件管模型怎么连上；只用其中一个都能跑，两个一起用才完整。
+
+> 它还会提示你为模型条目补 `contextWindow` —— 没有这个字段，Harness 的上下文压缩算不出触发点，
+> 也就压不到 272K 的加价线之下（见上一节）。
+
 ### 配置项
 
 | 字段 | 默认 | 说明 |
@@ -185,6 +209,16 @@ Node 的 ESM 模块缓存持有旧的 `lib/index.js`，在「设置 → 插件�
 | [docs/development.md](docs/development.md) | 构建、测试、以及两条只有真实运行才会暴露的契约约束 |
 
 ## 变更记录 / Changelog
+
+### 0.1.2
+
+- **补齐生态元数据。** `package.json` 增加 `repository` / `homepage` / `bugs`；
+  keywords 加入 `dsh-plugin`（生态按这个 GitHub topic 索引）。此前仓库没有 `dsh-plugin` topic，
+  在 awesome 列表与 topic 聚合页里都搜不到
+- **`@deepseek-ai/schemastery` 改为 `peerDependencies`**（原先在 `dependencies`）。
+  官方发布建议要求官方包用 peer 声明，避免同一 harness 包出现两份副本；
+  它由 profile 提供，安装时不会再被复制一份
+- **README 引用配套的 Agent 预设**，说明本插件只负责连接、预设负责 Agent 行为
 
 ### 0.1.1
 

@@ -9,7 +9,7 @@ importers:
   .:
     dependencies:
       '@deepseek-ai/schemastery':
-        specifier: ^3.18.4
+        specifier: '>=3.18 <4'
         version: 3.18.4
       jose:
         specifier: ^6.2.12
