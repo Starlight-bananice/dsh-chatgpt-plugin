@@ -186,8 +186,19 @@ Node 的 ESM 模块缓存持有旧的 `lib/index.js`，在「设置 → 插件�
 
 ## 变更记录 / Changelog
 
-### 未发布
+### 0.1.1
 
+- **文档重写。** README 改为面向使用者的手册（安装、使用、模型配置、配置项、按现象排障），
+  实现细节、验证说明与开发注意事项迁到 `docs/`。这三份文档此前不在发布清单里，现在会随包发布。
+- **修复：`react` / `react-dom` 未声明为依赖。** `tests/client.mjs` 用 React 挂载客户端 bundle，
+  但这两个包此前只能通过 `scripts/build.sh` 建立的软链解析 —— 在没有构建过的 clone 上
+  `pnpm test` 会以 `Cannot find module 'react'` 失败，且最后两个套件根本不会执行（由 CI 首次运行发现）。
+
+### 0.1.0
+
+- 在 ChatGPT 方案（Plus / Pro）上注册 `chatgpt` provider 路由，走公开的 Responses API，
+  用 Sign in with ChatGPT 的 OAuth 令牌认证
+- 设置页登录卡片、多账号、重新授权、退出登录、用量链接、真实连通性测试
 - **修复：工具返回的图片不再丢失。** `function_call_output` 只接受文本，此前图片被替换为占位文字、
   模型完全看不到 —— 截图检查、网页视觉验证、Office 排版检查因此静默失效。现在图片作为紧随该输出项
   之后的 user 消息发出，复用用户上传图片的同一条路径（同样的字节上限与 data URL 拼法，
