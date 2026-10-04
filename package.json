@@ -33,6 +33,7 @@
     "cordis.patch.yml",
     "scripts/build.sh",
     "scripts/tsconfig.client.template.json",
+    "docs",
     "README.md",
     "tests"
   ],
