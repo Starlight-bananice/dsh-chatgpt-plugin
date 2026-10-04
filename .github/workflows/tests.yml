@@ -1,0 +1,35 @@
+name: tests
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 11
+
+      - uses: actions/setup-node@v5
+        with:
+          node-version: '22'
+          cache: pnpm
+
+      - name: Install
+        run: pnpm install --frozen-lockfile
+
+      # The suites import the COMMITTED lib/, never a build: `scripts/build.sh`
+      # needs a full DeepSeek Harness checkout (it links the plugin into one and
+      # compiles with that checkout's tsc), which CI does not have. That makes
+      # this job a check on the published artifact as well as on the sources —
+      # if someone edits src/ and forgets `pnpm run build`, the tests still pass
+      # against the stale lib/, so keep the two in sync by hand. The README says
+      # so; re-running the suite after a build is the only automated guard.
+      - name: Test suites
+        run: pnpm test
